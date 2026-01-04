@@ -2,11 +2,14 @@
   "name": "p5-tool-viewer",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "dev": "node build.js && wrangler dev",
+    "build": "node build.js",
+    "deploy": "node build.js && wrangler deploy"
   },
   "devDependencies": {
+    "html-minifier-terser": "7.2.0",
     "wrangler": "4.54.0"
   }
 }
