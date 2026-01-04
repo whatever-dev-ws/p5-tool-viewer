@@ -24,9 +24,9 @@ const headers = `/*
   Content-Security-Policy: default-src 'none'; script-src https://cdn.jsdelivr.net 'sha256-${scriptHash}' https://whatever-dev-ws.github.io; style-src 'sha256-${styleHash}'; base-uri 'none'; form-action 'none'; frame-ancestors https://whatever-dev-ws.github.io
   X-Content-Type-Options: nosniff`;
 
-fs.mkdirSync('public', { recursive: true });
-fs.writeFileSync('public/index.html', minified);
-fs.writeFileSync('public/_headers', headers);
+fs.mkdirSync('dist', { recursive: true });
+fs.writeFileSync('dist/index.html', minified);
+fs.writeFileSync('dist/_headers', headers);
 
 console.log('Build complete');
 console.log('Style hash:', styleHash);
