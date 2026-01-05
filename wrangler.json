@@ -3,6 +3,6 @@
   "name": "p5-tool-viewer",
   "compatibility_date": "2026-01-03",
   "assets": {
-    "directory": "./public"
+    "directory": "./dist"
   }
 }
