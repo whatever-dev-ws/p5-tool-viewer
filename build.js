@@ -21,7 +21,7 @@ const styleHash = crypto.createHash('sha256').update(styleContent).digest('base6
 const scriptHash = crypto.createHash('sha256').update(scriptContent).digest('base64');
 
 const headers = `/*
-  Content-Security-Policy: default-src 'none'; script-src https://cdn.jsdelivr.net 'sha256-${scriptHash}' https://whatever-dev-ws.github.io; style-src 'sha256-${styleHash}'; worker-src blob:; base-uri 'none'; form-action 'none'; frame-ancestors https://whatever-dev-ws.github.io
+  Content-Security-Policy: default-src 'none'; script-src https://cdn.jsdelivr.net 'sha256-${scriptHash}' https://whatever-dev-ws.github.io blob:; style-src 'sha256-${styleHash}'; worker-src blob:; base-uri 'none'; form-action 'none'; frame-ancestors https://whatever-dev-ws.github.io
   X-Content-Type-Options: nosniff`;
 
 fs.mkdirSync('dist', { recursive: true });
