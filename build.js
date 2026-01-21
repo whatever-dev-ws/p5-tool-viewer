@@ -11,17 +11,14 @@ const minified = await minify(html, {
   minifyCSS: true,
 });
 
-const styleMatch = minified.match(/<style>(.*?)<\/style>/);
 const scriptMatch = minified.match(/<script>(.*?)<\/script>/g);
 
-const styleContent = styleMatch ? styleMatch[1] : '';
 const scriptContent = scriptMatch ? scriptMatch[scriptMatch.length - 1].replace(/<\/?script>/g, '') : '';
 
-const styleHash = crypto.createHash('sha256').update(styleContent).digest('base64');
 const scriptHash = crypto.createHash('sha256').update(scriptContent).digest('base64');
 
 const headers = `/*
-  Content-Security-Policy: default-src 'none'; script-src https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/ 'sha256-${scriptHash}' https://whatever-dev-ws.github.io blob:; style-src 'sha256-${styleHash}'; worker-src blob:; base-uri 'none'; form-action 'none'; frame-ancestors https://whatever-dev-ws.github.io
+  Content-Security-Policy: default-src 'none'; script-src https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/ 'sha256-${scriptHash}' https://whatever-dev-ws.github.io blob:; connect-src https://cdnjs.cloudflare.com/ajax/libs/topcoat/ https://fonts.googleapis.com data:; img-src data:; font-src https://cdnjs.cloudflare.com/ajax/libs/topcoat/ https://fonts.gstatic.com; style-src 'unsafe-inline'; worker-src blob:; base-uri 'none'; form-action 'none'; frame-ancestors https://whatever-dev-ws.github.io
   X-Content-Type-Options: nosniff`;
 
 fs.mkdirSync('dist', { recursive: true });
@@ -29,5 +26,4 @@ fs.writeFileSync('dist/index.html', minified);
 fs.writeFileSync('dist/_headers', headers);
 
 console.log('Build complete');
-console.log('Style hash:', styleHash);
 console.log('Script hash:', scriptHash);
